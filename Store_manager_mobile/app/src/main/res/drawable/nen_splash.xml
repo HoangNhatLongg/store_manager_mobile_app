@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Nen splash sang, dong bo voi nen trang cua man hinh dang nhap. -->
+    <solid android:color="@color/nen_splash" />
+</shape>

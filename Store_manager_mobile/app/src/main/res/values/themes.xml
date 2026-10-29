@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Store_manager" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <!-- Theme duoc dung ngay khi ung dung duoc mo lan dau. -->
+    <style name="Theme.Store_manager" parent="Base.Theme.Store_manager">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">@color/xanh_chu_dao</item>
+        <item name="android:statusBarColor">@color/nen_splash</item>
+        <item name="android:navigationBarColor">@color/nen_splash</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Cau hinh system splash tren Android 12 tro len. -->
+        <item name="android:windowSplashScreenBackground">@color/nen_splash</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_store_manager</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/xanh_nhat</item>
+    </style>
+
+</resources>

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fillViewport="true"
+    tools:context=".ManHinhChinh">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <!-- Khu vuc thuong hieu mo phong phan ben trai cua giao dien web. -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/the_thuong_hieu"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:cardBackgroundColor="#10B981"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="0dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/ten_ung_dung"
+                android:padding="7dp"
+                android:src="@drawable/logo_store_manager" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tieu_de_ung_dung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text="@string/ten_ung_dung"
+            android:textColor="#0F172A"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/the_thuong_hieu"
+            app:layout_constraintStart_toEndOf="@id/the_thuong_hieu"
+            app:layout_constraintTop_toTopOf="@id/the_thuong_hieu" />
+
+        <!-- Tieu de chinh va mo ta duoc lay tu phan branding cua web. -->
+        <TextView
+            android:id="@+id/ban_quan_ly_thong_minh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/ban_quan_ly_thong_minh"
+            android:textColor="#0F172A"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/the_thuong_hieu" />
+
+        <TextView
+            android:id="@+id/mo_ta_thuong_hieu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/mo_ta_thuong_hieu"
+            android:textColor="#64748B"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ban_quan_ly_thong_minh" />
+
+        <!-- Ba chi so nho giup phan branding mobile gan voi web hon. -->
+        <LinearLayout
+            android:id="@+id/cum_chi_so"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mo_ta_thuong_hieu">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#ECFDF5"
+                app:cardCornerRadius="14dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10x"
+                        android:textColor="#047857"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/chi_so_nhanh_hon"
+                        android:textColor="#64748B"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="3dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#ECFDF5"
+                app:cardCornerRadius="14dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="99%"
+                        android:textColor="#047857"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/chi_so_chinh_xac"
+                        android:textColor="#64748B"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#ECFDF5"
+                app:cardCornerRadius="14dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24/7"
+                        android:textColor="#047857"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/chi_so_ho_tro"
+                        android:textColor="#64748B"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- Form dang nhap giu cung thu tu va noi dung voi web. -->
+        <TextView
+            android:id="@+id/tieu_de_dang_nhap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="@string/tieu_de_dang_nhap"
+            android:textColor="#0F172A"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cum_chi_so" />
+
+        <TextView
+            android:id="@+id/loi_chao_dang_nhap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/loi_chao_dang_nhap"
+            android:textColor="#64748B"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tieu_de_dang_nhap" />
+
+        <!-- Khu vuc hien thi loi validate hoac loi tra ve tu API. -->
+        <TextView
+            android:id="@+id/thong_bao_loi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="#FEF2F2"
+            android:padding="14dp"
+            android:textColor="#B91C1C"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loi_chao_dang_nhap" />
+
+        <!-- Truong email. -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/khung_email"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:hint="@string/nhan_email"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thong_bao_loi">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/o_nhap_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/goi_y_email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingVertical="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Truong mat khau co nut hien hoac an mat khau. -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/khung_mat_khau"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/nhan_mat_khau"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/khung_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/o_nhap_mat_khau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/goi_y_mat_khau"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingVertical="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Hang tien ich giong giao dien web: ghi nho va quen mat khau. -->
+        <LinearLayout
+            android:id="@+id/hang_tien_ich"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/khung_mat_khau">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/o_ghi_nho_dang_nhap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:buttonTint="#059669"
+                android:text="@string/ghi_nho_dang_nhap"
+                android:textColor="#64748B" />
+
+            <TextView
+                android:id="@+id/nut_quen_mat_khau"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/quen_mat_khau"
+                android:textColor="#059669"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Nut submit va vung loading khi goi API. -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nut_dang_nhap"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/nut_dang_nhap"
+            android:textSize="16sp"
+            app:backgroundTint="#059669"
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hang_tien_ich" />
+
+        <ProgressBar
+            android:id="@+id/vong_tai"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/nut_dang_nhap"
+            app:layout_constraintEnd_toEndOf="@id/nut_dang_nhap"
+            app:layout_constraintStart_toStartOf="@id/nut_dang_nhap"
+            app:layout_constraintTop_toTopOf="@id/nut_dang_nhap" />
+
+        <!-- Tai khoan demo giu lai de phuc vu hoc tap va test API. -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/the_tai_khoan_demo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardBackgroundColor="#F1F5F9"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nut_dang_nhap"
+            app:strokeWidth="0dp">
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/chan_trang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/chan_trang"
+            android:textColor="#94A3B8"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/the_tai_khoan_demo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

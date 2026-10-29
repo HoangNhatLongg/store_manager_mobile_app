@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/nen_splash">
+
+    <!-- Logo o trung tam man hinh khoi dong. -->
+    <ImageView
+        android:id="@+id/logo_khoi_dong"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:contentDescription="@string/ten_splash"
+        android:src="@drawable/logo_store_manager"
+        app:layout_constraintBottom_toTopOf="@id/ten_khoi_dong"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <!-- Ten ung dung hien thi duoi logo. -->
+    <TextView
+        android:id="@+id/ten_khoi_dong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/ten_splash"
+        android:textColor="@color/xam_chu"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo_khoi_dong" />
+
+    <!-- Mo ta ngan phu hop voi bo nhan dien cua web. -->
+    <TextView
+        android:id="@+id/mo_ta_khoi_dong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/mo_ta_splash"
+        android:textColor="@color/xam_phu"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ten_khoi_dong" />
+
+    <!-- Loading nho de nguoi dung biet app dang chuyen sang man hinh dang nhap. -->
+    <ProgressBar
+        android:id="@+id/vong_tai_khoi_dong"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="32dp"
+        android:indeterminateTint="@color/xanh_chu_dao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mo_ta_khoi_dong" />
+
+    <TextView
+        android:id="@+id/thong_bao_khoi_dong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:text="@string/dang_tai_ung_dung"
+        android:textColor="@color/xam_phu"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

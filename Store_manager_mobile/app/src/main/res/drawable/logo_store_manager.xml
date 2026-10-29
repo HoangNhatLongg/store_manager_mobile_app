@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Nen logo dang hinh vuong bo goc. -->
+    <path
+        android:fillColor="#FF059669"
+        android:pathData="M18,8 L90,8 C96,8 100,12 100,18 L100,90 C100,96 96,100 90,100 L18,100 C12,100 8,96 8,90 L8,18 C8,12 12,8 18,8 Z" />
+
+    <!-- Tui hang la bieu tuong chinh cua ung dung. -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M30,42 L78,42 L83,82 C83.5,86 80.5,89 76.5,89 L31.5,89 C27.5,89 24.5,86 25,82 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M39,43 C39,30 45,23 54,23 C63,23 69,30 69,43 L63,43 C63,34 60,29 54,29 C48,29 45,34 45,43 Z" />
+
+    <!-- Hai net xanh tao diem nhan nhan dien. -->
+    <path
+        android:fillColor="#FF059669"
+        android:pathData="M36,57 L72,57 L72,63 L36,63 Z" />
+    <path
+        android:fillColor="#FF059669"
+        android:pathData="M43,69 L65,69 L65,75 L43,75 Z" />
+</vector>

@@ -1,0 +1,542 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "31210af949173819f56ae2e575b2fd18",
+    "entities": [
+      {
+        "tableName": "san_pham",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `ten` TEXT NOT NULL, `maSku` TEXT NOT NULL, `maVach` TEXT, `giaNhap` REAL NOT NULL, `giaBan` REAL NOT NULL, `tonKho` INTEGER NOT NULL, `tonToiThieu` INTEGER NOT NULL, `moTa` TEXT, `anh` TEXT, `maDanhMuc` TEXT, `dangHoatDong` INTEGER NOT NULL, `capNhatLuc` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ten",
+            "columnName": "ten",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maSku",
+            "columnName": "maSku",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maVach",
+            "columnName": "maVach",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "giaNhap",
+            "columnName": "giaNhap",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "giaBan",
+            "columnName": "giaBan",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tonKho",
+            "columnName": "tonKho",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tonToiThieu",
+            "columnName": "tonToiThieu",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "moTa",
+            "columnName": "moTa",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "anh",
+            "columnName": "anh",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "maDanhMuc",
+            "columnName": "maDanhMuc",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "dangHoatDong",
+            "columnName": "dangHoatDong",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "capNhatLuc",
+            "columnName": "capNhatLuc",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "danh_muc",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `ten` TEXT NOT NULL, `slug` TEXT, `capNhatLuc` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ten",
+            "columnName": "ten",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "capNhatLuc",
+            "columnName": "capNhatLuc",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "don_vi_tinh",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `ten` TEXT NOT NULL, `vietTat` TEXT NOT NULL, `laDonViCoBan` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ten",
+            "columnName": "ten",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vietTat",
+            "columnName": "vietTat",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "laDonViCoBan",
+            "columnName": "laDonViCoBan",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "don_vi_san_pham",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `maSanPham` TEXT NOT NULL, `maDonViTinh` TEXT NOT NULL, `soLuongQuyDoi` INTEGER NOT NULL, `gia` REAL NOT NULL, `laMacDinh` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maSanPham",
+            "columnName": "maSanPham",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maDonViTinh",
+            "columnName": "maDonViTinh",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "soLuongQuyDoi",
+            "columnName": "soLuongQuyDoi",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gia",
+            "columnName": "gia",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "laMacDinh",
+            "columnName": "laMacDinh",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "khach_hang",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `ten` TEXT NOT NULL, `soDienThoai` TEXT, `email` TEXT, `diaChi` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ten",
+            "columnName": "ten",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "soDienThoai",
+            "columnName": "soDienThoai",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "diaChi",
+            "columnName": "diaChi",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "nha_cung_cap",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `ten` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ten",
+            "columnName": "ten",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "hoa_don_ban",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `operationId` TEXT NOT NULL, `soHoaDon` TEXT, `maKhachHang` TEXT, `tamTinh` REAL NOT NULL, `giamGia` REAL NOT NULL, `tongCong` REAL NOT NULL, `phuongThucThanhToan` TEXT NOT NULL, `ghiChu` TEXT, `trangThai` TEXT NOT NULL, `soHoaDonServer` TEXT, `thongBaoLoi` TEXT, `taoLuc` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "operationId",
+            "columnName": "operationId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "soHoaDon",
+            "columnName": "soHoaDon",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "maKhachHang",
+            "columnName": "maKhachHang",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tamTinh",
+            "columnName": "tamTinh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "giamGia",
+            "columnName": "giamGia",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tongCong",
+            "columnName": "tongCong",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phuongThucThanhToan",
+            "columnName": "phuongThucThanhToan",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ghiChu",
+            "columnName": "ghiChu",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "trangThai",
+            "columnName": "trangThai",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "soHoaDonServer",
+            "columnName": "soHoaDonServer",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "thongBaoLoi",
+            "columnName": "thongBaoLoi",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "taoLuc",
+            "columnName": "taoLuc",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_hoa_don_ban_operationId",
+            "unique": false,
+            "columnNames": [
+              "operationId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_hoa_don_ban_operationId` ON `${TABLE_NAME}` (`operationId`)"
+          },
+          {
+            "name": "index_hoa_don_ban_trangThai",
+            "unique": false,
+            "columnNames": [
+              "trangThai"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_hoa_don_ban_trangThai` ON `${TABLE_NAME}` (`trangThai`)"
+          }
+        ]
+      },
+      {
+        "tableName": "dong_hoa_don_ban",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `maHoaDon` TEXT NOT NULL, `maSanPham` TEXT NOT NULL, `tenSanPham` TEXT NOT NULL, `soLuong` INTEGER NOT NULL, `heSoQuyDoi` INTEGER NOT NULL, `donGia` REAL NOT NULL, `thanhTien` REAL NOT NULL, `tenDonViBan` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maHoaDon",
+            "columnName": "maHoaDon",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maSanPham",
+            "columnName": "maSanPham",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tenSanPham",
+            "columnName": "tenSanPham",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "soLuong",
+            "columnName": "soLuong",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "heSoQuyDoi",
+            "columnName": "heSoQuyDoi",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "donGia",
+            "columnName": "donGia",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thanhTien",
+            "columnName": "thanhTien",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tenDonViBan",
+            "columnName": "tenDonViBan",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_dong_hoa_don_ban_maHoaDon",
+            "unique": false,
+            "columnNames": [
+              "maHoaDon"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_dong_hoa_don_ban_maHoaDon` ON `${TABLE_NAME}` (`maHoaDon`)"
+          }
+        ]
+      },
+      {
+        "tableName": "hang_dong_bo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `operationId` TEXT NOT NULL, `loaiThaoTac` TEXT NOT NULL, `duLieuJson` TEXT NOT NULL, `soLanThu` INTEGER NOT NULL, `thongBaoLoi` TEXT, `trangThai` TEXT NOT NULL, `taoLuc` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "operationId",
+            "columnName": "operationId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "loaiThaoTac",
+            "columnName": "loaiThaoTac",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "duLieuJson",
+            "columnName": "duLieuJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "soLanThu",
+            "columnName": "soLanThu",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thongBaoLoi",
+            "columnName": "thongBaoLoi",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "trangThai",
+            "columnName": "trangThai",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "taoLuc",
+            "columnName": "taoLuc",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_hang_dong_bo_operationId",
+            "unique": false,
+            "columnNames": [
+              "operationId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_hang_dong_bo_operationId` ON `${TABLE_NAME}` (`operationId`)"
+          },
+          {
+            "name": "index_hang_dong_bo_trangThai",
+            "unique": false,
+            "columnNames": [
+              "trangThai"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_hang_dong_bo_trangThai` ON `${TABLE_NAME}` (`trangThai`)"
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '31210af949173819f56ae2e575b2fd18')"
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/thanh_tab_duoi"
+    android:layout_width="match_parent"
+    android:layout_height="78dp"
+    android:background="@drawable/nen_tab_duoi"
+    android:elevation="12dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingStart="6dp"
+    android:paddingEnd="6dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tab_tong_quan"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/tong_quan_ngan"
+        android:textColor="@color/xanh_chu_dao"
+        android:textSize="11sp"
+        android:background="@drawable/nen_tab_binh_thuong"
+        app:icon="@drawable/bieu_tuong_tong_quan"
+        app:iconGravity="textTop"
+        app:iconTint="@color/xanh_dam" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tab_ban_hang"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/ban_hang"
+        android:textSize="11sp"
+        android:textColor="@color/xanh_chu_dao"
+        android:background="@drawable/nen_tab_binh_thuong"
+        app:icon="@drawable/bieu_tuong_ban_hang"
+        app:iconGravity="textTop"
+        app:iconTint="@color/xanh_dam" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tab_ton_kho"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/ton_kho_man_hinh"
+        android:textColor="@color/xanh_chu_dao"
+        android:textSize="11sp"
+        android:background="@drawable/nen_tab_binh_thuong"
+        app:icon="@drawable/bieu_tuong_ton_kho"
+        app:iconGravity="textTop"
+        app:iconTint="@color/xanh_dam" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tab_san_pham"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/san_pham"
+        android:textColor="@color/xanh_chu_dao"
+        android:textSize="11sp"
+        android:background="@drawable/nen_tab_binh_thuong"
+        app:icon="@drawable/bieu_tuong_ton_kho"
+        app:iconGravity="textTop"
+        app:iconTint="@color/xanh_dam" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tab_menu"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/menu"
+        android:textColor="@color/xanh_chu_dao"
+        android:textSize="11sp"
+        android:background="@drawable/nen_tab_binh_thuong"
+        app:icon="@drawable/bieu_tuong_menu"
+        app:iconGravity="textTop"
+        app:iconTint="@color/xanh_dam" />
+</LinearLayout>

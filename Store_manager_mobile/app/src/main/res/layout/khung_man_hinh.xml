@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/khung_man_hinh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <!-- Noi dung man hinh duoc thay doi boi bo dieu huong tab. -->
+    <FrameLayout
+        android:id="@+id/noi_dung_man_hinh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Tab duoi luon hien thi de nguoi dung chuyen nhanh giua module pho bien. -->
+    <include layout="@layout/thanh_tab_duoi" />
+</LinearLayout>

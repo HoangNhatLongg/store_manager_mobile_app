@@ -3,9 +3,10 @@ package com.example.store_manager
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.ScrollView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,7 +20,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 
-class ManHinhChinh : AppCompatActivity() {
+class DangNhap : AppCompatActivity() {
     // Khai bao cac thanh phan giao dien cua man hinh dang nhap.
     private lateinit var oNhapEmail: TextInputEditText
     private lateinit var oNhapMatKhau: TextInputEditText
@@ -29,6 +30,9 @@ class ManHinhChinh : AppCompatActivity() {
     private lateinit var nutDangNhap: MaterialButton
     private lateinit var vongTai: ProgressBar
     private lateinit var thongBaoLoi: TextView
+
+    // ScrollView chua man hinh dang nhap, dung de cuon noi dung khi ban phim mo.
+    private lateinit var khungManHinh: ScrollView
 
     // Dich vu nay chiu trach nhiem goi API va luu access token.
     private lateinit var dichVuDangNhap: DichVuDangNhap
@@ -49,17 +53,69 @@ class ManHinhChinh : AppCompatActivity() {
             xuLyDangNhap()
         }
 
-        // Xu ly padding cua thanh trang thai va thanh dieu huong he thong.
+        // Xu ly padding cua thanh trang thai, thanh dieu huong he thong va
+        // ban phim. Khi ban phim mo len, phai day noi dung len tren de cac
+        // o nhap khong bi che.
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            // Lay gia tri lon nhat giua thanh dieu huong va ban phim, vi ban
+            // phim thuong nam ngay tren thanh dieu huong.
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val banPhim = insets.getInsets(WindowInsetsCompat.Type.ime())
+
             v.setPadding(
                 systemBars.left,
                 systemBars.top,
                 systemBars.right,
-                systemBars.bottom
+                maxOf(systemBars.bottom, banPhim.bottom)
             )
+
             insets
         }
+
+        // Khi ban phim mo len, cuon man hinh den truong dang nhap de nguoi dung
+        // nhin thay duoc noi dung dang nhap va khong bi che.
+        cuonDenTruongDangNhapKhiBanPhimMo()
+    }
+
+    /**
+     * Cuon man hinh den truong nhap dang co focus khi ban phim mo len.
+     *
+     * Tren thiet bi nho, man hinh dang nhap co nhieu noi dung branding o tren
+     * nen truong nhap nam duoi ban phim. Can cuon toi de nguoi dung khong phai
+     * tu keo man hinh.
+     */
+    private fun cuonDenTruongDangNhapKhiBanPhimMo() {
+        // Do lai do phan sau moi lan ban phim doi trang thai de tinh lai
+        // vi tri cua truong nhap.
+        val doTreDoLai = object : android.view.ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                // Chi xu ly khi ban phim thuc su mo len.
+                val banPhimMo = ViewCompat.getRootWindowInsets(khungManHinh)
+                    ?.isVisible(WindowInsetsCompat.Type.ime()) == true
+                if (!banPhimMo) {
+                    return
+                }
+
+                // Lay o nhap dang co focus de biet can cuon toi dau.
+                val truongDangFocus = currentFocus as? EditText ?: return
+
+                // Lay vi tri cua o nhap trong cua so va chieu cao cua no.
+                val viTriNhap = IntArray(2)
+                truongDangFocus.getLocationInWindow(viTriNhap)
+                val canhDuoiNhap = viTriNhap[1] + truongDangFocus.height
+
+                // Canh duoi cua vung noi dung dang hien.
+                val canhDuoiManHinh = khungManHinh.height
+
+                // Neu o nhap bi ben duoi canh duoi man hinh thi can cuon len.
+                if (canhDuoiNhap > canhDuoiManHinh) {
+                    val chenhLech = canhDuoiNhap - canhDuoiManHinh
+                    khungManHinh.scrollBy(0, chenhLech)
+                }
+            }
+        }
+
+        khungManHinh.viewTreeObserver.addOnGlobalLayoutListener(doTreDoLai)
     }
 
     /**
@@ -75,10 +131,11 @@ class ManHinhChinh : AppCompatActivity() {
         nutDangNhap = findViewById(R.id.nut_dang_nhap)
         vongTai = findViewById(R.id.vong_tai)
         thongBaoLoi = findViewById(R.id.thong_bao_loi)
+        khungManHinh = findViewById(R.id.main)
     }
 
     /**
-     * Lay du lieu nguoi dung nhap, validate o client va bat dau coroutine
+    80|     * Lay du lieu nguoi dung nhap, validate o client va bat dau coroutine
      * de goi API ma khong lam dong bang giao dien.
      */
     private fun xuLyDangNhap() {
@@ -153,15 +210,20 @@ class ManHinhChinh : AppCompatActivity() {
         when (ketQua) {
             is KetQuaDangNhap.ThanhCong -> {
                 xoaThongBaoLoi()
-                Toast.makeText(
-                    this,
-                    getString(R.string.loi_dang_nhap_thanh_cong),
-                    Toast.LENGTH_SHORT
-                ).show()
 
-                // Tam thoi giu tai man hinh nay de kiem tra token.
-                // Buoc tiep theo se mo dashboard sau khi co man hinh navigation.
-                nutDangNhap.text = getString(R.string.da_dang_nhap)
+                // ADMIN vao dashboard; STAFF vao thang man hinh ban hang vi dashboard
+                // la khu vuc chi danh cho tai khoan quan tri.
+                val manHinhSauDangNhap = if (ketQua.phanHoi.user.role.equals("ADMIN", true)) {
+                    ManHinhTongQuan::class.java
+                } else {
+                    ManHinhBanHang::class.java
+                }
+                val yDinhMoTongQuan = android.content.Intent(
+                    this,
+                    manHinhSauDangNhap
+                )
+                startActivity(yDinhMoTongQuan)
+                finish()
             }
 
             is KetQuaDangNhap.ThatBai -> {

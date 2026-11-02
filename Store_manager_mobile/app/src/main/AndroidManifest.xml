@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".UngDungStoreManager"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +18,44 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Store_manager">
         <activity
-            android:name=".ManHinhChinh"
+            android:name=".DangNhap"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".ManHinhTongQuan"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhSanPham"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhBanHang"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhTonKho"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhDoanhThu"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhChiTietHoaDon"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhHoaDonThanhCong"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhDonViSanPham"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhDanhMuc"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhDonViTinh"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhKhachHang"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhNhaCungCap"
             android:exported="false" />
         <activity
             android:name=".ManHinhKhoiDong"
@@ -28,6 +66,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- FileProvider dung de chia se file bao cao CSV cho ung dung khac. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/duong_dan_file_chia_se" />
+        </provider>
     </application>
 
 </manifest>

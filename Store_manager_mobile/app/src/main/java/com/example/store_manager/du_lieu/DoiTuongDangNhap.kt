@@ -32,9 +32,47 @@ data class PhanHoiDangNhap(
     @SerializedName("accessToken")
     val maTruyCap: String,
 
+    /**
+     * Token dung de lai access token moi khi het han.
+     *
+     * Co the rong neu backend chua duoc cap nhat len phien ban refresh.
+     */
+    @SerializedName("refreshToken")
+    val tokenLamMoi: String? = null,
+
     val tokenType: String,
     val expiresIn: Int,
     val user: ThongTinNguoiDung
+)
+
+/**
+ * Du lieu gui len API lam moi token.
+ */
+data class YeuCauLamMoiToken(
+    @SerializedName("refreshToken")
+    val tokenLamMoi: String
+)
+
+/**
+ * Response thanh cong cua POST /api/v1/auth/refresh.
+ */
+data class PhanHoiLamMoiToken(
+    @SerializedName("accessToken")
+    val maTruyCap: String,
+
+    @SerializedName("refreshToken")
+    val tokenLamMoi: String,
+
+    val tokenType: String,
+    val expiresIn: Int
+)
+
+/**
+ * Du lieu gui len API dang xuat.
+ */
+data class YeuCauDangXuat(
+    @SerializedName("refreshToken")
+    val tokenLamMoi: String
 )
 
 /**

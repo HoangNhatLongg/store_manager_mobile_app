@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Chi cho phep chia se file bao cao sinh trong thu muc cache. -->
+    <cache-path
+        name="bao_cao"
+        path="bao_cao/" />
+</paths>

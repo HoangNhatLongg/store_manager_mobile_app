@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -38,6 +39,14 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    buildToolsVersion = "37.0.0"
+}
+
+// Cau hinh sinh ma Room. KSP nhanh hon kapt va phu hop voi Kotlin 2.x.
+ksp {
+    // Thong bao loi Room khi truy van khong khop voi schema.
+    arg("room.schemaLocation", "$projectDir/schemas")
+    arg("room.incremental", "true")
 }
 
 dependencies {
@@ -53,6 +62,16 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
+
+    // Room: database cuc bo de ho tro lam viec khi mat mang.
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // WorkManager: chay dong bo du lieu o nen khi co ket noi.
+    implementation(libs.androidx.work.runtime.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -14,7 +14,7 @@ import java.io.IOException
  */
 class DichVuDangNhap(boiCanh: Context) {
     private val boiCanh = boiCanh.applicationContext
-    private val api = BoTaoApi.taoApi()
+    private val api = BoTaoApi.taoApi(this.boiCanh)
     private val boNhoPhien = BoNhoPhienDangNhap(this.boiCanh)
     private val boPhanTichJson = Gson()
 
@@ -83,5 +83,28 @@ class DichVuDangNhap(boiCanh: Context) {
                 thongBao = boiCanh.getString(R.string.loi_khong_xac_dinh)
             )
         }
+    }
+
+    /**
+     * Dang xuat khoi he thong.
+     *
+     * Server thu hoi refresh token de token do khong the dung lai duoc. Viec goi
+     * API co the that bai khi mat mang, nhung phien dang nhap van duoc xoa tren
+     * thiet bi va nguoi dung van duoc dang nhap lai binh thuong.
+     */
+    suspend fun dangXuat() = withContext(Dispatchers.IO) {
+        val tokenLamMoi = boNhoPhien.layTokenLamMoi()
+
+        if (!tokenLamMoi.isNullOrBlank()) {
+            try {
+                api.dangXuat(YeuCauDangXuat(tokenLamMoi))
+            } catch (_: IOException) {
+                // Mat mang: bo qua, phien dang nhap van duoc xoa cuc bo.
+            } catch (_: Exception) {
+                // Loi khong mong doi: bo qua, phien dang nhap van duoc xoa cuc bo.
+            }
+        }
+
+        boNhoPhien.xoaPhien()
     }
 }

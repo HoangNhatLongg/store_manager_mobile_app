@@ -8,4 +8,11 @@
     <color name="nen_splash">#F8FAFC</color>
     <color name="xam_chu">#0F172A</color>
     <color name="xam_phu">#64748B</color>
+
+    <!-- Mau dung rieng cho man hinh ton kho, lay theo mau tren web. -->
+    <color name="do_chu">#DC2626</color>
+    <color name="do_nhat">#FEF2F2</color>
+    <color name="vang_chu">#D97706</color>
+    <color name="vang_nhat">#FFFBEB</color>
+    <color name="xanh_dam_nhat">#DBEAFE</color>
 </resources>

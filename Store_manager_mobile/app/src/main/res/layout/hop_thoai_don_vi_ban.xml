@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tieu_de_don_vi_ban"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chon_don_vi_ban"
+        android:textColor="@color/xam_chu"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mo_ta_don_vi_ban"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/mo_ta_chon_don_vi_ban"
+        android:textColor="@color/xam_phu"
+        android:textSize="13sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/danh_sach_don_vi_ban"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:maxHeight="320dp"
+        android:nestedScrollingEnabled="true" />
+</LinearLayout>

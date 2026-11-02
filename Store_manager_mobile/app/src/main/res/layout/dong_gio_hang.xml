@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="@drawable/nen_tab_binh_thuong"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingVertical="9dp">
+
+    <TextView
+        android:id="@+id/ten_mat_hang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:maxLines="2"
+        android:textColor="@color/xam_chu"
+        android:textSize="12sp" />
+
+    <!-- Ten don vi ban giup phan biet cung mot san pham nhung khac don vi. -->
+    <TextView
+        android:id="@+id/don_vi_mat_hang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/xam_phu"
+        android:textSize="10sp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nut_giam_so_luong"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Giảm số lượng"
+            android:gravity="center"
+            android:text="-"
+            android:textColor="@color/xam_phu"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/so_luong_mat_hang"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nen_o_so_luong"
+            android:inputType="number"
+            android:maxLength="5"
+            android:gravity="center"
+            android:padding="2dp"
+            android:textColor="@color/xam_chu"
+            android:textSize="12sp"
+            android:selectAllOnFocus="true" />
+
+        <TextView
+            android:id="@+id/nut_tang_so_luong"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Tăng số lượng"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="@color/xanh_dam"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/gia_tri_mat_hang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:gravity="end"
+        android:textColor="@color/xam_chu"
+        android:textSize="11sp" />
+</LinearLayout>

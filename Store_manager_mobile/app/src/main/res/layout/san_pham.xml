@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp">
+
+        <!-- Tieu de man hinh, giong phan header cua web. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quan_ly_san_pham"
+                    android:textColor="@color/xam_chu"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/mo_ta_quan_ly_san_pham"
+                    android:textColor="@color/xam_phu"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/nut_them_san_pham"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="14dp"
+                android:text="@string/them_san_pham"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/xanh_chu_dao"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/bieu_tuong_them"
+                app:iconSize="18dp"
+                app:iconTint="@color/white" />
+        </LinearLayout>
+
+        <!-- Thong bao loi khi tai du lieu that bai. -->
+        <TextView
+            android:id="@+id/thong_bao_san_pham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/nen_thong_bao_loi"
+            android:padding="12dp"
+            android:textColor="@color/do_chu"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <!-- Bo loc: tim kiem + danh muc, xep chong de hop voi man hinh nho. -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/khung_tim_kiem"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/tim_kiem_san_pham"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:startIconContentDescription="@string/tim_kiem_san_pham"
+            app:startIconDrawable="@drawable/bieu_tuong_tim_kiem"
+            app:startIconTint="@color/xam_phu">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/o_tim_kiem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/bo_loc_danh_muc_san_pham"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/nen_o_chon"
+                android:paddingHorizontal="12dp"
+                android:spinnerMode="dropdown" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/bo_loc_san_pham_an"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="@string/san_pham_an"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Vong tai khi dang tai du lieu. -->
+        <ProgressBar
+            android:id="@+id/vong_tai_san_pham"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:indeterminateTint="@color/xanh_chu_dao"
+            android:visibility="gone" />
+
+        <!-- Thong ke nhanh: so san pham dang co tren man hinh. -->
+        <TextView
+            android:id="@+id/tong_so_san_pham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/xam_phu"
+            android:textSize="12sp" />
+
+        <!-- Danh sach san pham. -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/danh_sach_san_pham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:nestedScrollingEnabled="false"
+            android:clipToPadding="false"
+            android:paddingBottom="4dp" />
+
+        <!-- Thong bao khi khong co san pham nao. -->
+        <TextView
+            android:id="@+id/thong_bao_rong_san_pham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:text="@string/khong_co_san_pham_ton_kho"
+            android:textColor="@color/xam_phu"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <!-- Phan trang, giong dong phan pagination cua web. -->
+        <LinearLayout
+            android:id="@+id/khu_vuc_phan_trang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/nut_trang_truoc"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minWidth="0dp"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/bieu_tuong_sang_trai"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp"
+                app:iconTint="@color/xam_chu"
+                app:strokeColor="#E2E8F0" />
+
+            <TextView
+                android:id="@+id/thong_tin_phan_trang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/xam_phu"
+                android:textSize="13sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/nut_trang_sau"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minWidth="0dp"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/bieu_tuong_sang_phai"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp"
+                app:iconTint="@color/xam_chu"
+                app:strokeColor="#E2E8F0" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

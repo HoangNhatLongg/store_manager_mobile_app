@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingVertical="6dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.6"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ten_dong_hoa_don"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textColor="@color/xam_chu"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/don_vi_dong_hoa_don"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textColor="@color/xam_phu"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/so_luong_dong_hoa_don"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:textColor="@color/xam_phu"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/thanh_tien_dong_hoa_don"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"
+        android:gravity="end"
+        android:textColor="@color/xam_chu"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+</LinearLayout>

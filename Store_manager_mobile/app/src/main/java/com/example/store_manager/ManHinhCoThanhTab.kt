@@ -169,7 +169,13 @@ abstract class ManHinhCoThanhTab : AppCompatActivity() {
                 moManHinh(ManHinhDoanhThu::class.java)
             }
 
-        ganMenuDangPhatTrien(giaoDienMenu, R.id.menu_nhap_hang, R.string.nhap_hang, hopThoai)
+        // Nhap hang da co man hinh rieng, mo truc tiep tu menu.
+        giaoDienMenu.findViewById<MaterialButton>(R.id.menu_nhap_hang)
+            .setOnClickListener {
+                hopThoai.dismiss()
+                moManHinh(ManHinhNhapHang::class.java)
+            }
+
         ganMenuDangPhatTrien(giaoDienMenu, R.id.menu_lich_su_nhap, R.string.lich_su_nhap, hopThoai)
         ganMenuDangPhatTrien(giaoDienMenu, R.id.menu_lich_su_ban, R.string.lich_su_ban, hopThoai)
 

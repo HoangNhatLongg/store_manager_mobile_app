@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Store Manager</string>
     <string name="ten_splash">Store Manager</string>
-    <string name="mo_ta_splash">Quản lý cửa hàng tạp hóa</string>
+    <string name="mo_ta_splash">Quản ly cửa hàng tạp hóa</string>
     <string name="tieu_de_dang_nhap">Đăng nhập</string>
     <string name="loi_chao_dang_nhap">Chào mừng bạn quay trở lại</string>
     <string name="nhan_email">Email</string>
@@ -15,7 +15,7 @@
     <string name="email_demo">admin@store.com</string>
     <string name="mat_khau_demo">admin123</string>
     <string name="ten_ung_dung">Store Manager</string>
-    <string name="mo_ta_ung_dung">Quản lý cửa hàng tạp hóa thông minh</string>
+    <string name="mo_ta_ung_dung">Quản ly cửa hàng tạp hóa thông minh</string>
     <string name="loi_email_rong">Vui lòng nhập email</string>
     <string name="loi_email_sai">Email không hợp lệ</string>
     <string name="loi_mat_khau_rong">Vui lòng nhập mật khẩu</string>
@@ -25,8 +25,8 @@
     <string name="nho_mat_khau">Mật khẩu: admin123</string>
     <string name="email_hien_thi">Email: admin@store.com</string>
     <string name="quen_mat_khau">Quên mật khẩu?</string>
-    <string name="ban_quan_ly_thong_minh">Quản lý cửa hàng thông minh hơn</string>
-    <string name="mo_ta_thuong_hieu">Hệ thống quản lý cửa hàng tạp hóa với AI OCR giúp bạn nhập hàng nhanh chóng và theo dõi tồn kho dễ dàng.</string>
+    <string name="ban_quan_ly_thong_minh">Quản ly cửa hàng thông minh hơn</string>
+    <string name="mo_ta_thuong_hieu">Hệ thống quản ly cửa hàng tạp hóa với AI OCR giúp bạn nhập hàng nhanh chóng và theo dõi tồn kho dễ dàng.</string>
     <string name="chi_so_nhanh_hon">Nhanh hơn</string>
     <string name="chi_so_chinh_xac">Độ chính xác</string>
     <string name="chi_so_ho_tro">Hỗ trợ</string>
@@ -92,8 +92,8 @@
     <string name="thao_tac_thanh_cong">Thao tác thành công</string>
     <string name="du_lieu_khong_hop_le">Vui lòng kiểm tra lại dữ liệu</string>
     <string name="khong_the_tai_du_lieu">Không thể tải dữ liệu</string>
-    <string name="quan_ly_san_pham">Quản lý sản phẩm</string>
-    <string name="mo_ta_quan_ly_san_pham">Quản lý danh sách sản phẩm</string>
+    <string name="quan_ly_san_pham">Quản ly sản phẩm</string>
+    <string name="mo_ta_quan_ly_san_pham">Quản ly danh sách sản phẩm</string>
     <string name="gia_va_ton_kho">Giá và tồn kho</string>
     <string name="mo_ta_va_hinh_anh">Mô tả và hình ảnh</string>
     <string name="ten_san_pham_bat_buoc">Tên sản phẩm *</string>
@@ -112,7 +112,7 @@
     <string name="xac_nhan_xoa_san_pham">Bạn có chắc chắn muốn xóa sản phẩm \"%1$s\" không?</string>
     <string name="xoa_san_pham">Xóa sản phẩm</string>
     <string name="luu_thay_doi">Lưu thay đổi</string>
-    <string name="dang_xu_ly">Đang xử lý...</string>
+    <string name="dang_xu_ly">Đang xử ly...</string>
     <string name="loc_theo_danh_muc">Lọc theo danh mục</string>
     <string name="sua">Sửa</string>
     <string name="don_vi_cua_san_pham">Đơn vị của sản phẩm</string>
@@ -123,7 +123,21 @@
     <string name="so_luong_quy_doi">Số lượng quy đổi</string>
     <string name="gia_theo_don_vi">Giá theo đơn vị</string>
     <string name="don_vi_mac_dinh">Đơn vị mặc định</string>
+    <string name="don_vi_goc">Đơn vị gốc (nhập hàng)</string>
+    <string name="mo_ta_don_vi_goc">Đơn vị dùng để nhập hàng từ nhà cung cấp, ví dụ thùng, lốc. Hệ thống sẽ tự quy đổi sang đơn vị bán lẻ khi nhập.</string>
+    <string name="chua_cau_hinhinh_don_vi_nhap">Chưa cấu hình đơn vị</string>
+    <string name="loi_chua_cau_hinhinh_don_vi_nhap">Sản phẩm chưa có đơn vị. Vui lòng vào màn hình Đơn vị của sản phẩm để cấu hình đơn vị gốc và đơn vị bán lẻ.</string>
+    <string name="thong_bao_quy_doi_don_vi_goc">1 %1$s = %2$d %3$s • Tổng quy đổi: %4$d</string>
     <string name="khong_co_don_vi">Chưa có đơn vị</string>
+    <string name="don_vi_ban_le_mac_dinh">Đơn vị bán lẻ mặc định *</string>
+    <string name="mo_ta_don_vi_ban_le_mac_dinh">Đơn vị dùng để bán lẻ và tính tồn kho. Ví dụ: Lon, Chai, Gói.</string>
+    <string name="don_vi_goc_nhap_hang">Đơn vị gốc (nhập hàng)</string>
+    <string name="mo_ta_don_vi_goc_nhap_hang">Đơn vị dùng khi nhập hàng, ví dụ Thùng, Lốc. Hệ thống tự quy đổi sang đơn vị bán lẻ để cộng tồn kho.</string>
+    <string name="dung_luon_don_vi_ban_le_mac_dinh">Dùng luôn đơn vị bán lẻ mặc định</string>
+    <string name="he_so_quy_doi_don_vi">1 %1$s = bao nhiêu %2$s?</string>
+    <string name="can_chon_don_vi_ban_le_mac_dinh">Vui lòng chọn đơn vị bán lẻ mặc định</string>
+    <string name="chua_co_don_vi_tinh_nao">Chưa có đơn vị tính nào. Hãy thêm đơn vị tính ở màn hình Đơn vị tính trước.</string>
+    <string name="thong_tin_don_vi_san_pham_moi">Thiết lập đơn vị</string>
     <string name="xoa_xac_nhan">Bạn có chắc muốn xóa mục này không?</string>
     <string name="mo_ta_san_pham">Mô tả</string>
     <string name="san_pham_an">Sản phẩm ẩn</string>
@@ -173,7 +187,7 @@
     <string name="ton_kho_man_hinh">Tồn kho</string>
     <string name="doanh_thu">Doanh thu</string>
     <string name="menu">Menu</string>
-    <string name="quan_ly_du_lieu">Quản lý dữ liệu</string>
+    <string name="quan_ly_du_lieu">Quản ly dữ liệu</string>
     <string name="quan_ly_danh_muc">Danh mục</string>
     <string name="quan_ly_don_vi">Đơn vị tính</string>
     <string name="quan_ly_khach_hang">Khách hàng</string>
@@ -190,7 +204,7 @@
     <string name="dang_kiem_tra_token">Đang kiểm tra phiên đăng nhập...</string>
     <string name="loi_het_ton_kho_khi_ban">%1$s không còn đủ tồn kho, đã điều chỉnh số lượng</string>
     <string name="mo_ta_ton_kho_man_hinh">Theo dõi số lượng tồn và cảnh báo hàng sắp hết</string>
-    <string name="tieu_de_san_pham_can_chu_y">Sản phẩm cần chú ý</string>
+    <string name="tieu_de_san_pham_can_chu_y">Sản phẩm cần chú y</string>
     <string name="mo_ta_san_pham_can_chu_y">Danh sách sẽ được kết nối với dữ liệu tồn kho trong bước tiếp theo.</string>
     <string name="mo_ta_doanh_thu_man_hinh">Theo dõi doanh thu, lợi nhuận và hiệu quả kinh doanh</string>
     <string name="tieu_de_bao_cao_doanh_thu">Báo cáo doanh thu</string>
@@ -246,7 +260,7 @@
     <string name="loi_xuat_bao_cao">Không xuất được báo cáo: %1$s</string>
 
     <!-- Chuoi dung cho man hinh doanh thu. -->
-    <string name="quan_ly_doanh_thu">Quản lý doanh thu</string>
+    <string name="quan_ly_doanh_thu">Quản ly doanh thu</string>
     <string name="quay_lai">Quay lại</string>
     <string name="tong_doanh_thu_nam">Tổng DT năm</string>
     <string name="so_don_hang">Số đơn hàng</string>
@@ -283,10 +297,10 @@
     <string name="viet_tat_cua">Viết tắt: %1$s</string>
     <string name="so_hoa_don_cua_khach">%1$d hóa đơn</string>
     <string name="so_phieu_nhap">%1$d phiếu nhập</string>
-    <string name="mo_ta_quan_ly_danh_muc">Quản lý danh mục sản phẩm</string>
-    <string name="mo_ta_quan_ly_don_vi">Quản lý đơn vị tính và quy đổi</string>
-    <string name="mo_ta_quan_ly_khach_hang">Quản lý thông tin khách hàng</string>
-    <string name="mo_ta_quan_ly_nha_cung_cap">Quản lý thông tin nhà cung cấp</string>
+    <string name="mo_ta_quan_ly_danh_muc">Quản ly danh mục sản phẩm</string>
+    <string name="mo_ta_quan_ly_don_vi">Quản ly đơn vị tính và quy đổi</string>
+    <string name="mo_ta_quan_ly_khach_hang">Quản ly thông tin khách hàng</string>
+    <string name="mo_ta_quan_ly_nha_cung_cap">Quản ly thông tin nhà cung cấp</string>
     <string name="them_danh_muc">Thêm danh mục</string>
     <string name="them_danh_muc_moi">Thêm danh mục mới</string>
     <string name="chinh_sua_danh_muc">Chỉnh sửa danh mục</string>
@@ -321,4 +335,32 @@
     <string name="loi_xoa_don_vi_dang_dung">Đơn vị đang được dùng cho sản phẩm, không thể xóa.</string>
     <string name="loi_khong_tim_thay_du_lieu">Không tìm thấy dữ liệu</string>
     <string name="ten_bat_buoc">Vui lòng nhập tên</string>
+
+    <!-- Chuoi dung cho man hinh nhap hang (P8). -->
+    <string name="mo_ta_nhap_hang">Tạo phiếu nhập, cập nhật tồn kho và giá nhập</string>
+    <string name="thong_tin_phieu_nhap">Thông tin phiếu nhập</string>
+    <string name="ghi_chu_phieu_nhap">Ghi chú phiếu nhập</string>
+    <string name="danh_sach_hang_nhap">Danh sách hàng nhập</string>
+    <string name="them_hang">Thêm hàng</string>
+    <string name="chua_co_dong_hang">Chưa có dòng hàng nào</string>
+    <string name="so_hang">Số hàng</string>
+    <string name="tong_so_luong_nhap">Tổng số lượng</string>
+    <string name="tong_tien_phieu_nhap">Tổng tiền</string>
+    <string name="luu_phieu_nhap">Lưu phiếu nhập</string>
+    <string name="xoa_dong">Xoá</string>
+    <string name="don_gia_nhap">Đơn giá nhập</string>
+    <string name="da_khop_san_pham">Đã khớp với sản phẩm có sẵn</string>
+    <string name="se_tao_san_pham_moi">Sản phẩm mới, sẽ được tạo khi lưu phiếu</string>
+    <string name="khong_chon_danh_muc">Không chọn danh mục</string>
+    <string name="khong_chon_nha_cung_cap">Chọn nhà cung cấp</string>
+    <string name="san_pham_tuong_tam">Sản phẩm tương tự</string>
+    <string name="mo_ta_goi_y_san_pham">Sản phẩm \"%1$s\" chưa có trong danh sách. Chọn sản phẩm tương tự hoặc tạo mới.</string>
+    <string name="tao_san_pham_moi">Tạo sản phẩm mới</string>
+    <string name="loi_chua_chon_nha_cung_cap">Vui lòng chọn nhà cung cấp</string>
+    <string name="loi_chua_co_dong_hang">Vui lòng nhập ít nhất một dòng hàng</string>
+    <string name="loi_so_luong_hoac_don_gia_khong_hop_le">Số lượng và đơn giá của mỗi dòng hàng phải lớn hơn 0</string>
+    <string name="loi_tai_danh_sach_san_pham">Không tải được danh sách sản phẩm, có thể không gắn được sản phẩm đã có sẵn</string>
+    <string name="nhap_hang_thanh_cong">Nhập hàng thành công!</string>
+    <string name="noi_dung_luu_phieu_nhap">Số phiếu nhập: %1$s</string>
+    <string name="tong_tien_phieu_nhap_lai">Tổng tiền: %1$s</string>
 </resources>

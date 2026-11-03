@@ -56,4 +56,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/don_vi_mac_dinh" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/cong_tac_don_vi_goc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/don_vi_goc" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mo_ta_don_vi_goc"
+        android:textColor="@color/xam_phu"
+        android:textSize="12sp" />
 </LinearLayout>

@@ -252,6 +252,28 @@ interface ApiCuaHang {
     @POST("api/v1/sales")
     suspend fun taoHoaDon(@Body yeuCau: YeuCauTaoHoaDon): Response<PhanHoiTaoHoaDon>
 
+    // ======== Nhap hang (P8) ========
+
+    /**
+     * Tao phieu nhap hang tren server.
+     *
+     * Server tang ton kho, cap nhat gia nhap va tao phieu + dong hang trong
+     * mot transaction nen khong co truong hop ton kho da tang nhung phieu lai
+     * khong tao duoc.
+     *
+     * @param yeuCau Yeu cau tao phieu nhap kem danh sach dong hang.
+     */
+    @POST("api/v1/imports")
+    suspend fun taoPhieuNhap(@Body yeuCau: YeuCauTaoPhieuNhap): Response<PhanHoiPhieuNhap>
+
+    /**
+     * Lay chi tiet mot phieu nhap.
+     *
+     * @param maPhieu Id cua phieu nhap can xem.
+     */
+    @GET("api/v1/imports/{id}")
+    suspend fun layChiTietPhieuNhap(@Path("id") maPhieu: String): Response<PhanHoiPhieuNhap>
+
     /**
      * Lay bao cao doanh thu theo khoang thoi gian.
      *

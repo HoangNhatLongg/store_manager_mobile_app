@@ -15,6 +15,17 @@ data class LoiApi(
 )
 
 /**
+ * Loi do server tra ve, giu ca ma loi va thong bao de hien thi cho nguoi dung.
+ *
+ * @param maLoi     Ma loi chuan, vi du "VALIDATION_ERROR".
+ * @param thongBao  Message tieng Viet cho nguoi dung.
+ */
+class LoiApiException(
+    val maLoi: String,
+    val thongBao: String
+) : Exception(thongBao.ifBlank { maLoi })
+
+/**
  * Lop phan tich loi tu phia server theo ma loi chuan.
  *
  * Backend mobile luon tra loi voi duong dan { code, message }. App phai dua

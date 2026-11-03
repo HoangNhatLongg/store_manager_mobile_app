@@ -18,7 +18,8 @@ Tài liệu tuân theo mẫu trong [`MHUNG_TAI_LIEU_TINH_NANG.md`](./MHUNG_TAI_L
 | P5 | Quản lý đơn vị tính | [`don_vi_tinh.md`](./don_vi_tinh.md) | ✅ Hoàn thành 02/11/2026 |
 | P6 | Quản lý khách hàng | [`khach_hang.md`](./khach_hang.md) | ✅ Hoàn thành 02/11/2026 |
 | P7 | Quản lý nhà cung cấp | [`nha_cung_cap.md`](./nha_cung_cap.md) | ✅ Hoàn thành 02/11/2026 |
-| P8 | Nhập hàng | [`nhap_hang.md`](./nhap_hang.md) | Chưa bắt đầu |
+| P8 | Nhập hàng | [`nhap_hang.md`](./nhap_hang.md) | ✅ Hoàn thành 03/11/2026 |
+| - | Đơn vị sản phẩm (mặc định & gốc) | [`don_vi_san_pham.md`](./don_vi_san_pham.md) | ✅ Hoàn thành 03/11/2026 |
 | P9 | OCR hoá đơn | [`ocr_hoa_don.md`](./ocr_hoa_don.md) | Chưa bắt đầu |
 | P10 | Lịch sử nhập hàng | [`lich_su_nhap.md`](./lich_su_nhap.md) | Chưa bắt đầu |
 | P11 | Lịch sử bán hàng | [`lich_su_ban.md`](./lich_su_ban.md) | Chưa bắt đầu |

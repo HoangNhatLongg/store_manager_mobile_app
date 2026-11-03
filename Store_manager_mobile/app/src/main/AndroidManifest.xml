@@ -58,6 +58,10 @@
             android:name=".ManHinhNhaCungCap"
             android:exported="false" />
         <activity
+            android:name=".ManHinhNhapHang"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".ManHinhKhoiDong"
             android:exported="true">
             <intent-filter>

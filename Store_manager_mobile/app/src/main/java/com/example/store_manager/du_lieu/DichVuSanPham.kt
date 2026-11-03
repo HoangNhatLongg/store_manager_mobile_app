@@ -158,7 +158,7 @@ class DichVuSanPham(boiCanh: Context) {
     suspend fun taoSanPham(duLieu: DuLieuSanPham): Result<SanPham> = withContext(Dispatchers.IO) {
         runCatching {
             val phanHoi = api.taoSanPham(duLieu)
-            check(phanHoi.isSuccessful) { PhanTichLoi.layMaLoi(phanHoi) }
+            if (!phanHoi.isSuccessful) throw loiApi(phanHoi)
             requireNotNull(phanHoi.body()?.data)
         }
     }
@@ -174,7 +174,7 @@ class DichVuSanPham(boiCanh: Context) {
         withContext(Dispatchers.IO) {
             runCatching {
                 val phanHoi = api.suaSanPham(maSanPham, duLieu)
-                check(phanHoi.isSuccessful) { PhanTichLoi.layMaLoi(phanHoi) }
+                if (!phanHoi.isSuccessful) throw loiApi(phanHoi)
                 requireNotNull(phanHoi.body()?.data)
             }
         }
@@ -231,7 +231,7 @@ class DichVuSanPham(boiCanh: Context) {
         withContext(Dispatchers.IO) {
             runCatching {
                 val phanHoi = api.themDonViSanPham(yeuCau)
-                check(phanHoi.isSuccessful) { PhanTichLoi.layMaLoi(phanHoi) }
+                if (!phanHoi.isSuccessful) throw loiApi(phanHoi)
                 requireNotNull(phanHoi.body())
             }
         }
@@ -242,7 +242,7 @@ class DichVuSanPham(boiCanh: Context) {
     ): Result<DonViSanPham> = withContext(Dispatchers.IO) {
         runCatching {
             val phanHoi = api.suaDonViSanPham(maDonVi, yeuCau)
-            check(phanHoi.isSuccessful) { PhanTichLoi.layMaLoi(phanHoi) }
+            if (!phanHoi.isSuccessful) throw loiApi(phanHoi)
             requireNotNull(phanHoi.body())
         }
     }
@@ -250,7 +250,18 @@ class DichVuSanPham(boiCanh: Context) {
     suspend fun xoaDonViSanPham(maDonVi: String): Result<Unit> = withContext(Dispatchers.IO) {
         runCatching {
             val phanHoi = api.xoaDonViSanPham(maDonVi)
-            check(phanHoi.isSuccessful) { PhanTichLoi.layMaLoi(phanHoi) }
+            if (!phanHoi.isSuccessful) throw loiApi(phanHoi)
         }
+    }
+
+    /**
+     * Chuyen response loi cua server thanh exception giu ma loi va thong bao.
+     *
+     * @param phanHoi Response loi tu Retrofit.
+     * @return Exception de nem ra cho Activity hien thi.
+     */
+    private fun loiApi(phanHoi: retrofit2.Response<*>): LoiApiException {
+        val loi = PhanTichLoi.layLoi(phanHoi)
+        return LoiApiException(loi.maLoi, loi.thongBao)
     }
 }

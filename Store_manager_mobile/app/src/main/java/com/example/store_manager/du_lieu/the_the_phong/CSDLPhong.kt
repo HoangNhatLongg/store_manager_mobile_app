@@ -24,7 +24,7 @@ import androidx.room.RoomDatabase
         TheDongHoaDonBan::class,
         TheHangDongBo::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class CSDLPhong : RoomDatabase() {

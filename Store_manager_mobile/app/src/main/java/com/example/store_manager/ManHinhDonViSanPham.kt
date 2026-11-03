@@ -61,6 +61,7 @@ class ManHinhDonViSanPham : ManHinhCoThanhTab() {
         val oQuyDoi = giaoDien.findViewById<TextInputEditText>(R.id.o_so_luong_quy_doi)
         val oGia = giaoDien.findViewById<TextInputEditText>(R.id.o_gia_theo_don_vi)
         val congTacMacDinh = giaoDien.findViewById<SwitchMaterial>(R.id.cong_tac_don_vi_mac_dinh)
+        val congTacDonViGoc = giaoDien.findViewById<SwitchMaterial>(R.id.cong_tac_don_vi_goc)
         boChonDonVi.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, cacDonVi.map { it.name })
         val viTri = cacDonVi.indexOfFirst { it.id == donViDangSua?.unitId }
         if (viTri >= 0) boChonDonVi.setSelection(viTri)
@@ -68,7 +69,24 @@ class ManHinhDonViSanPham : ManHinhCoThanhTab() {
             oQuyDoi.setText(it.conversionQty.toString())
             oGia.setText(DinhDangTien.taoChuoiChoOCoNhap(it.price))
             congTacMacDinh.isChecked = it.isDefault
+            congTacDonViGoc.isChecked = it.isPurchase
         } ?: oQuyDoi.setText("1")
+
+        // Khong cho bo co "ban le mac dinh" khi day la don vi mac dinh duy nhat
+        // cua san pham, vi ton kho duoc dem theo don vi nay.
+        val laMacDinhDuyNhat = donViDangSua?.isDefault == true &&
+            cacDonViCuaSanPham.count { it.isDefault } <= 1
+        congTacMacDinh.isEnabled = !laMacDinhDuyNhat
+
+        // Don vi ban le mac dinh luon co he so quy doi bang 1, nen khi bat cong
+        // tac nay thi khoa o he so quy doi.
+        val capNhatHeSoQuyDoi = {
+            val laMacDinh = congTacMacDinh.isChecked
+            oQuyDoi.isEnabled = !laMacDinh
+            if (laMacDinh) oQuyDoi.setText("1")
+        }
+        congTacMacDinh.setOnCheckedChangeListener { _, _ -> capNhatHeSoQuyDoi() }
+        capNhatHeSoQuyDoi()
 
         val hopThoai = MaterialAlertDialogBuilder(this)
             .setTitle(if (donViDangSua == null) R.string.them_don_vi else R.string.sua_don_vi)
@@ -87,7 +105,15 @@ class ManHinhDonViSanPham : ManHinhCoThanhTab() {
                         Toast.makeText(this, R.string.du_lieu_khong_hop_le, Toast.LENGTH_SHORT).show()
                         return@setOnClickListener
                     }
-                    YeuCauDonViSanPham(maSanPham, it.id, soLuongQuyDoi, gia, congTacMacDinh.isChecked)
+                    YeuCauDonViSanPham(
+                        productId = maSanPham,
+                        unitId = it.id,
+                        // Don vi ban le mac dinh luon co he so quy doi bang 1.
+                        conversionQty = if (congTacMacDinh.isChecked) 1 else soLuongQuyDoi,
+                        price = gia,
+                        isDefault = congTacMacDinh.isChecked,
+                        isPurchase = congTacDonViGoc.isChecked
+                    )
                 }
                 if (yeuCau == null) {
                     Toast.makeText(this, R.string.du_lieu_khong_hop_le, Toast.LENGTH_SHORT).show()
@@ -102,7 +128,16 @@ class ManHinhDonViSanPham : ManHinhCoThanhTab() {
                     if (ketQua.isSuccess) {
                         hopThoai.dismiss()
                         taiDuLieu()
-                    } else Toast.makeText(this@ManHinhDonViSanPham, R.string.khong_the_tai_du_lieu, Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Hien thi thong bao do server tra ve, vi du khong the bo
+                        // co don vi ban le mac dinh duy nhat cua san pham.
+                        val loi = ketQua.exceptionOrNull()?.message
+                        Toast.makeText(
+                            this@ManHinhDonViSanPham,
+                            loi?.takeIf { it.isNotBlank() } ?: getString(R.string.khong_the_tai_du_lieu),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
         }

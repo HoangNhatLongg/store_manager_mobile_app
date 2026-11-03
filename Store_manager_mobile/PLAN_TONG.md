@@ -235,16 +235,24 @@ Cả bốn màn hình dùng chung một bộ khung giao diện nên không lặp
 
 Mục tiêu: bám sát web `/import`.
 
-- [ ] **P8.1** Backend `POST /api/v1/imports` (transaction: tăng tồn kho, cập
+- [x] **P8.1** Backend `POST /api/v1/imports` (transaction: tăng tồn kho, cập
   nhật giá nhập, tạo phiếu + dòng hàng, tự tạo sản phẩm mới nếu cần).
-- [ ] **P8.2** Màn hình `ManHinhNhapHang`:
+  - File: `store-manager_web/src/app/api/v1/imports/route.ts`
+  - Thêm `GET /api/v1/imports/{id}` để lấy chi tiết phiếu (dùng cho P10).
+- [x] **P8.2** Màn hình `ManHinhNhapHang`:
   - Chọn nhà cung cấp.
   - Bảng dòng hàng: tên, số lượng, đơn giá, danh mục.
   - Thêm / xoá dòng.
   - Tổng tiền.
-- [ ] **P8.3** Hộp thoại gợi ý sản phẩm tương tự khi tên chưa khớp sản phẩm nào.
-- [ ] **P8.4** Gắn handler menu `menu_nhap_hang`.
-- [ ] **P8.5** Viết `docs/nhap_hang.md`.
+- [x] **P8.3** Hộp thoại gợi ý sản phẩm tương tự khi tên chưa khớp sản phẩm nào.
+- [x] **P8.4** Gắn handler menu `menu_nhap_hang`.
+- [x] **P8.5** Viết `docs/nhap_hang.md`.
+  - **Hoàn thành ngày 03/11/2026** ✅
+  - Số phiếu nhập sinh ở server dạng `PN-yyyyMMdd-xxxxxx`, có kiểm tra trùng.
+  - Tên tài nguyên Android không dùng ký tự `ý`, các id gợi ý dùng `goi_y`.
+  - Ô nhập cập nhật vào danh sách ngay khi gõ, không đợi mất focus, nên bấm
+    thẳng "Lưu phiếu nhập" không bị bỏ sót dữ liệu.
+  - Hộp thoại gợi ý mở sau 600ms ngừng gõ, tránh popup lặp khi đang nhập.
 
 ---
 
@@ -341,6 +349,7 @@ Mục tiêu: bám sát web `/import`.
 | 2026-11-02 | Sửa lỗi | Thiếu bảng `sync_operations` gây 500 khi tạo hoá đơn: chạy `prisma migrate resolve --applied` + áp dụng SQL migration; tiền khách đưa không còn bắt buộc (bỏ trống = khách đưa đủ tiền, tiền thừa = 0) | AI |
 | 2026-11-02 | Sửa lỗi | Sửa lỗi nhập số lượng trong giỏ hàng bị "văng ra": `TrinhBayGioHang` không dùng `notifyDataSetChanged()` (làm mất focus ô nhập), không ghi đè nội dung đang gõ, ô trống/không hợp lệ giữ số lượng cũ thay vì xoá dòng; `tinhSoLuongToiDa` không trừ dòng đang sửa; vượt tồn kho có thông báo | AI |
 | 2026-11-02 | P4 – P7 | Hoàn thành P4.1–P7.4: bổ sung API mobile CRUD cho danh mục, đơn vị tính, khách hàng, nhà cung cấp (tự sinh slug, kiểm tra trùng, chặn xoá khi còn dữ liệu liên quan, ẩn thay vì xoá khi đã phát sinh hoá đơn/phiếu nhập); Android dùng chung `ManHinhQuanLyDuLieu` + `TrinhBayBanGhi` + `bottom_sheet_ban_ghi.xml` cho cả 4 màn hình; gắn handler menu | AI |
+| 2026-11-03 | P8 | Hoàn thành P8.1–P8.5: backend `POST /api/v1/imports` (transaction tăng tồn kho, cập nhật giá nhập, tự tạo sản phẩm mới, sinh số phiếu `PN-yyyyMMdd-xxxxxx`) + `GET /api/v1/imports/{id}`; Android `ManHinhNhapHang` + `TrinhBayDongHangNhap` + `TrinhBaySanPhamGoiY` + `DichVuNhapHang` + `DoiTuongNhapHang`, hộp thoại gợi ý sản phẩm tương tự, gắn handler menu `menu_nhap_hang`; ô nhập cập nhật ngay khi gõ (không đợi mất focus), hộp thoại gợi ý debounce 600ms; build & typecheck sạch | AI |
 
 ---
 
@@ -356,7 +365,7 @@ Mục tiêu: bám sát web `/import`.
 | P5 Đơn vị tính | ✅ Hoàn thành | 02/11/2026 — build & typecheck đều sạch |
 | P6 Khách hàng | ✅ Hoàn thành | 02/11/2026 — build & typecheck đều sạch |
 | P7 Nhà cung cấp | ✅ Hoàn thành | 02/11/2026 — build & typecheck đều sạch |
-| P8 Nhập hàng | ⬜ Chưa bắt đầu | |
+| P8 Nhập hàng | ✅ Hoàn thành | 03/11/2026 — backend + Android, build sạch |
 | P9 OCR | ⬜ Chưa bắt đầu | |
 | P10 Lịch sử nhập | ⬜ Chưa bắt đầu | |
 | P11 Lịch sử bán | ⬜ Chưa bắt đầu | |

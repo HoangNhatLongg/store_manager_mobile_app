@@ -19,8 +19,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.store_manager.du_lieu.DanhMuc
 import com.example.store_manager.du_lieu.DichVuSanPham
 import com.example.store_manager.du_lieu.DinhDangTien
+import com.example.store_manager.du_lieu.DonViTinh
+import com.example.store_manager.du_lieu.DuLieuDonViGoc
+import com.example.store_manager.du_lieu.DuLieuDonViMacDinh
 import com.example.store_manager.du_lieu.DuLieuSanPham
 import com.example.store_manager.du_lieu.KetQuaSanPham
+import com.example.store_manager.du_lieu.LoiApiException
 import com.example.store_manager.du_lieu.SanPham
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -57,6 +61,7 @@ class ManHinhSanPham : ManHinhCoThanhTab() {
     private lateinit var trinhBaySanPham: TrinhBaySanPham
     private lateinit var dichVuSanPham: DichVuSanPham
     private var danhSachDanhMuc = listOf<DanhMuc>()
+    private var danhSachDonViTinh = listOf<DonViTinh>()
     private var congViecTimKiem: Job? = null
     private var trangHienTai = 1
     private var tongSoTrang = 1
@@ -96,7 +101,17 @@ class ManHinhSanPham : ManHinhCoThanhTab() {
             taiDanhSachSanPham(oTimKiem.text?.toString())
         }
         taiDanhMuc()
+        taiDonViTinh()
         taiDanhSachSanPham()
+    }
+
+    /**
+     * Tai danh sach don vi tinh de chon don vi ban le mac dinh va don vi goc.
+     */
+    private fun taiDonViTinh() {
+        lifecycleScope.launch {
+            danhSachDonViTinh = dichVuSanPham.taiDonVi().getOrDefault(emptyList())
+        }
     }
 
     /** Anh xa cac id trong XML vao bien co ten de hieu. */
@@ -260,6 +275,13 @@ class ManHinhSanPham : ManHinhCoThanhTab() {
         val oHinhAnh = giaoDien.findViewById<TextInputEditText>(R.id.o_hinh_anh_san_pham)
         val xemTruocHinhAnh = giaoDien.findViewById<ImageView>(R.id.xem_truoc_hinh_anh)
         val boChonDanhMuc = giaoDien.findViewById<Spinner>(R.id.bo_chon_danh_muc_san_pham)
+        val boChonDonViMacDinh =
+            giaoDien.findViewById<Spinner>(R.id.bo_chon_don_vi_mac_dinh_san_pham)
+        val boChonDonViGoc = giaoDien.findViewById<Spinner>(R.id.bo_chon_don_vi_goc_san_pham)
+        val oHeSoQuyDoi = giaoDien.findViewById<TextInputEditText>(R.id.o_he_so_quy_doi_san_pham)
+        val khungHeSoQuyDoi = giaoDien.findViewById<View>(R.id.khung_he_so_quy_doi)
+        val nhanHeSoQuyDoi = giaoDien.findViewById<TextView>(R.id.nhan_he_so_quy_doi)
+        val loiDonVi = giaoDien.findViewById<TextView>(R.id.loi_don_vi)
         val khungTen = giaoDien.findViewById<TextInputLayout>(R.id.khung_ten_san_pham)
         val khungSku = giaoDien.findViewById<TextInputLayout>(R.id.khung_sku_san_pham)
         val loiGia = giaoDien.findViewById<TextView>(R.id.loi_gia)
@@ -290,6 +312,115 @@ class ManHinhSanPham : ManHinhCoThanhTab() {
         }
         val viTriDanhMuc = danhSachDanhMuc.indexOfFirst { it.id == sanPham?.categoryId }
         if (viTriDanhMuc >= 0) boChonDanhMuc.setSelection(viTriDanhMuc)
+
+        // ======== Chon don vi ban le mac dinh va don vi goc =====
+        // Danh sach rong thi nguoi dung chua co don vi tinh nao de chon.
+        val coDonViTinh = danhSachDonViTinh.isNotEmpty()
+
+        val tenDonViMacDinh = mutableListOf(getString(R.string.chua_co_don_vi_tinh_nao))
+        val tenDonViGoc = mutableListOf(getString(R.string.dung_luon_don_vi_ban_le_mac_dinh))
+        if (coDonViTinh) {
+            tenDonViMacDinh.clear()
+            tenDonViMacDinh.addAll(danhSachDonViTinh.map { it.name })
+            tenDonViGoc.addAll(danhSachDonViTinh.map { it.name })
+        }
+
+        boChonDonViMacDinh.adapter = ArrayAdapter(
+            this,
+            R.layout.dong_chon_danh_muc,
+            tenDonViMacDinh
+        ).apply {
+            setDropDownViewResource(R.layout.dong_chon_danh_muc_dang_mo)
+        }
+
+        boChonDonViGoc.adapter = ArrayAdapter(
+            this,
+            R.layout.dong_chon_danh_muc,
+            tenDonViGoc
+        ).apply {
+            setDropDownViewResource(R.layout.dong_chon_danh_muc_dang_mo)
+        }
+
+        // Khi sua san pham, chon lai don vi dang gan.
+        val donViMacDinhHienTai = sanPham?.units?.firstOrNull { it.isDefault }
+            ?: sanPham?.units?.firstOrNull { it.conversionQty == 1 }
+        val donViGocHienTai = sanPham?.units?.firstOrNull { it.isPurchase }
+
+        donViMacDinhHienTai?.let { donVi ->
+            val viTri = danhSachDonViTinh.indexOfFirst { it.id == donVi.unitId }
+            if (viTri >= 0) boChonDonViMacDinh.setSelection(viTri)
+        }
+
+        // Don vi goc chi chon rieng khi khac don vi ban le mac dinh.
+        if (donViGocHienTai != null && donViMacDinhHienTai != null &&
+            donViGocHienTai.unitId != donViMacDinhHienTai.unitId
+        ) {
+            val viTri = danhSachDonViTinh.indexOfFirst { it.id == donViGocHienTai.unitId }
+            if (viTri >= 0) boChonDonViGoc.setSelection(viTri + 1)
+        }
+
+        /**
+         * Cap nhat hien thi he so quy doi theo don vi goc dang chon.
+         *
+         * He so quy doi chi xuat hien khi don vi goc khac don vi ban le mac dinh.
+         */
+        val capNhatHeSoQuyDoi = {
+            val donViMacDinh = danhSachDonViTinh.getOrNull(
+                boChonDonViMacDinh.selectedItemPosition
+            )
+            val donViGoc = danhSachDonViTinh.getOrNull(
+                boChonDonViGoc.selectedItemPosition - 1
+            )
+
+            val hienThi = donViGoc != null && donViMacDinh != null &&
+                donViGoc.id != donViMacDinh.id
+            khungHeSoQuyDoi.visibility = if (hienThi) View.VISIBLE else View.GONE
+
+            if (hienThi) {
+                nhanHeSoQuyDoi.text = getString(
+                    R.string.he_so_quy_doi_don_vi,
+                    donViGoc.name,
+                    donViMacDinh.name
+                )
+            }
+        }
+
+        capNhatHeSoQuyDoi()
+
+        boChonDonViMacDinh.onItemSelectedListener =
+            object : android.widget.AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: android.widget.AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    capNhatHeSoQuyDoi()
+                }
+
+                override fun onNothingSelected(parent: android.widget.AdapterView<*>?) = Unit
+            }
+
+        boChonDonViGoc.onItemSelectedListener =
+            object : android.widget.AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: android.widget.AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    capNhatHeSoQuyDoi()
+                }
+
+                override fun onNothingSelected(parent: android.widget.AdapterView<*>?) = Unit
+            }
+
+        // Neu san pham dang sua co he so quy doi san, nap lai gia tri.
+        donViGocHienTai?.let { donVi ->
+            if (donViMacDinhHienTai != null && donVi.unitId != donViMacDinhHienTai.unitId) {
+                oHeSoQuyDoi.setText(donVi.conversionQty.toString())
+            }
+        }
 
         // Dien gia tri cua san pham dang sua. Gia tien duoc chuyen ve chuoi
         // de dua vao o nhap ma khong co dau phay.
@@ -371,6 +502,31 @@ class ManHinhSanPham : ManHinhCoThanhTab() {
             // Chuyen du lieu trong form thanh doi tuong de gui len server.
             val giaNhap = DinhDangTien.chuyenChuoiSangTien(oGiaNhap.text?.toString())
             val giaBan = DinhDangTien.chuyenChuoiSangTien(oGiaBan.text?.toString())
+
+            // Don vi ban le mac dinh la bat buoc, ton kho duoc dem theo don vi nay.
+            val donViMacDinh = danhSachDonViTinh.getOrNull(
+                boChonDonViMacDinh.selectedItemPosition
+            )
+            if (donViMacDinh == null) {
+                loiDonVi.visibility = View.VISIBLE
+                loiDonVi.text = getString(R.string.can_chon_don_vi_ban_le_mac_dinh)
+                return@setOnClickListener
+            }
+            loiDonVi.visibility = View.GONE
+
+            // Don vi goc chi duoc chon rieng khi khac don vi ban le mac dinh.
+            val donViGoc = danhSachDonViTinh.getOrNull(
+                boChonDonViGoc.selectedItemPosition - 1
+            )
+            val heSoQuyDoi = oHeSoQuyDoi.text.toString().trim().toIntOrNull() ?: 1
+            val donViGocHopLe = donViGoc?.takeIf { it.id != donViMacDinh.id }
+
+            if (donViGocHopLe != null && heSoQuyDoi < 1) {
+                loiDonVi.visibility = View.VISIBLE
+                loiDonVi.text = getString(R.string.du_lieu_khong_hop_le)
+                return@setOnClickListener
+            }
+
             val duLieu = DuLieuSanPham(
                 name = oTen.text.toString().trim(),
                 sku = oSku.text.toString().trim(),
@@ -383,7 +539,18 @@ class ManHinhSanPham : ManHinhCoThanhTab() {
                 stock = oTon.text.toString().trim().toIntOrNull() ?: 0,
                 minStock = oTonToiThieu.text.toString().trim().toIntOrNull() ?: 10,
                 description = oMoTa.text.toString(),
-                imageUrl = oHinhAnh.text.toString().trim().ifBlank { null }
+                imageUrl = oHinhAnh.text.toString().trim().ifBlank { null },
+                donViMacDinh = DuLieuDonViMacDinh(
+                    unitId = donViMacDinh.id,
+                    price = giaBan
+                ),
+                donViGoc = donViGocHopLe?.let {
+                    DuLieuDonViGoc(
+                        unitId = it.id,
+                        conversionQty = heSoQuyDoi,
+                        price = giaBan * heSoQuyDoi
+                    )
+                }
             )
 
             // Kiem tra cac truong bat buoc truoc khi gui request.
@@ -454,8 +621,9 @@ class ManHinhSanPham : ManHinhCoThanhTab() {
      * @return Chuoi thong bao hien thi cho nguoi dung.
      */
     private fun thongBaoLoiTaoHoacSua(ketQua: Result<*>): String {
-        // Loi do server nem ra chua ma loi chuan trong message.
-        val maLoi = ketQua.exceptionOrNull()?.message.orEmpty()
+        val loi = ketQua.exceptionOrNull()
+        // Loi do server nem ra giu ca ma loi chuan va thong bao tieng Viet.
+        val maLoi = (loi as? LoiApiException)?.maLoi ?: loi?.message.orEmpty()
 
         return when {
             // Ten hoac SKU bi trung, huong dan nguoi dung doi lai.
@@ -465,11 +633,16 @@ class ManHinhSanPham : ManHinhCoThanhTab() {
             maLoi == "PRODUCT_HAS_INVOICE_HISTORY" ->
                 getString(R.string.loi_xoa_san_pham_da_nhap)
 
+            // San pham chua co don vi ban le mac dinh.
+            maLoi == "UNIT_REQUIRED" -> getString(R.string.can_chon_don_vi_ban_le_mac_dinh)
+
             // Cac truong bat buoc bi thieu.
             maLoi == "VALIDATION_ERROR" -> getString(R.string.loi_du_lieu_bat_buoc)
 
-            else -> ketQua.exceptionOrNull()?.message
-                ?: getString(R.string.khong_the_tai_du_lieu)
+            // Thong bao rieng tu server luu dau la thong bao tot nhat.
+            loi is LoiApiException && loi.thongBao.isNotBlank() -> loi.thongBao
+
+            else -> loi?.message ?: getString(R.string.khong_the_tai_du_lieu)
         }
     }
 

@@ -195,6 +195,118 @@
                 android:paddingHorizontal="14dp"
                 android:spinnerMode="dropdown" />
 
+            <!-- ======== Don vi ban le mac dinh va don vi goc ======== -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/thong_tin_don_vi_san_pham_moi"
+                android:textColor="@color/xanh_dam"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/don_vi_ban_le_mac_dinh"
+                android:textColor="@color/xam_phu"
+                android:textSize="12sp" />
+
+            <Spinner
+                android:id="@+id/bo_chon_don_vi_mac_dinh_san_pham"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/nen_o_chon"
+                android:paddingHorizontal="14dp"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/mo_ta_don_vi_mac_dinh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/mo_ta_don_vi_ban_le_mac_dinh"
+                android:textColor="@color/xam_phu"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/don_vi_goc_nhap_hang"
+                android:textColor="@color/xam_phu"
+                android:textSize="12sp" />
+
+            <Spinner
+                android:id="@+id/bo_chon_don_vi_goc_san_pham"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/nen_o_chon"
+                android:paddingHorizontal="14dp"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/mo_ta_don_vi_goc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/mo_ta_don_vi_goc_nhap_hang"
+                android:textColor="@color/xam_phu"
+                android:textSize="11sp" />
+
+            <!-- He so quy doi chi hien khi don vi goc khac don vi ban le mac dinh. -->
+            <LinearLayout
+                android:id="@+id/khung_he_so_quy_doi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/nhan_he_so_quy_doi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/xam_phu"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:hintTextColor="@color/xam_phu">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/o_he_so_quy_doi_san_pham"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:text="1"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/loi_don_vi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/do_chu"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
             <!-- ======== Gia va ton kho ======== -->
             <TextView
                 android:layout_width="match_parent"

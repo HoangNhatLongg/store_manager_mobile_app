@@ -240,6 +240,7 @@ class KhoDuLieuSanPham(boiCanh: Context) {
                             conversionQty = theDonVi.soLuongQuyDoi,
                             price = theDonVi.gia,
                             isDefault = theDonVi.laMacDinh,
+                            isPurchase = theDonVi.laDonViGoc,
                             unit = theDonViTinh
                                 .firstOrNull { it.id == theDonVi.maDonViTinh }
                                 ?.let { ChuyenDoiDuLieu.sangModelDonViTinh(it) }

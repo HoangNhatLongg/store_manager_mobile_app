@@ -1,5 +1,7 @@
 package com.example.store_manager.du_lieu
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Model san pham mobile nhan tu API products.
  *
@@ -22,7 +24,26 @@ data class SanPham(
     val isActive: Boolean = true,
     val category: DanhMuc? = null,
     val units: List<DonViSanPham> = emptyList()
-)
+) {
+    /**
+     * Don vi goc dung de nhap hang cua san pham.
+     *
+     * Neu san pham chua duoc gan don vi goc thi dung don vi ban le co ban
+     * de nhap hang, tranh khong the tao phieu nhap.
+     */
+    val donViGoc: DonViSanPham?
+        get() = units.firstOrNull { it.isPurchase }
+            ?: units.firstOrNull { it.conversionQty == 1 }
+            ?: units.firstOrNull { it.isDefault }
+            ?: units.firstOrNull()
+
+    /**
+     * Don vi ban le co ban, dung de dem ton kho.
+     */
+    val donViBanLeCoBan: DonViSanPham?
+        get() = units.firstOrNull { it.conversionQty == 1 }
+            ?: units.firstOrNull { it.isDefault }
+}
 
 /** Don vi ban cua san pham, vi du chai, thung hoac kg. */
 data class DonViSanPham(
@@ -31,6 +52,13 @@ data class DonViSanPham(
     val conversionQty: Int = 1,
     val price: Double = 0.0,
     val isDefault: Boolean = false,
+    /**
+     * True neu day la don vi goc dung de nhap hang, vi du thung, loc.
+     *
+     * Ton kho duoc luu theo don vi ban le co ban, nen don vi goc chi duoc
+     * dung de quy doi khi nhap hang.
+     */
+    val isPurchase: Boolean = false,
     val unit: DonViTinh? = null
 )
 
@@ -39,7 +67,8 @@ data class YeuCauDonViSanPham(
     val unitId: String,
     val conversionQty: Int,
     val price: Double,
-    val isDefault: Boolean
+    val isDefault: Boolean,
+    val isPurchase: Boolean = false
 )
 
 /** Response danh sach san pham co phan trang. */
@@ -65,7 +94,35 @@ data class DuLieuSanPham(
     val stock: Int = 0,
     val minStock: Int = 10,
     val description: String = "",
-    val imageUrl: String? = null
+    val imageUrl: String? = null,
+    @SerializedName("defaultUnit")
+    val donViMacDinh: DuLieuDonViMacDinh? = null,
+    @SerializedName("purchaseUnit")
+    val donViGoc: DuLieuDonViGoc? = null
+)
+
+/**
+ * Don vi ban le co ban cua san pham, dung de dem ton kho.
+ *
+ * @param unitId Id don vi tinh trong bang `units`.
+ * @param price   Gia ban theo don vi ban le co ban.
+ */
+data class DuLieuDonViMacDinh(
+    val unitId: String,
+    val price: Double = 0.0
+)
+
+/**
+ * Don vi goc dung de nhap hang, vi du thung, loc.
+ *
+ * @param unitId        Id don vi tinh trong bang `units`.
+ * @param conversionQty So don vi ban le co ban co trong 1 don vi goc.
+ * @param price         Gia cua 1 don vi goc.
+ */
+data class DuLieuDonViGoc(
+    val unitId: String,
+    val conversionQty: Int = 1,
+    val price: Double = 0.0
 )
 
 data class PhanHoiSanPhamDon(

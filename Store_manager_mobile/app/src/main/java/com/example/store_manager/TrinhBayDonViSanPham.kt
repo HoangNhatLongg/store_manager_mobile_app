@@ -38,7 +38,15 @@ class TrinhBayDonViSanPham(
         fun ganDuLieu(donVi: DonViSanPham) {
             ten.text = donVi.unit?.name ?: "-"
             thongTin.text = "${donVi.unit?.abbreviation ?: "-"} • Quy đổi: ${donVi.conversionQty} • ${DinhDangTien.dinhDangTien(donVi.price)}"
-            macDinh.text = if (donVi.isDefault) "Đơn vị mặc định" else ""
+
+            // Danh dau vai tro cua don vi: goc (nhap hang) va mac dinh (ban le).
+            val nhan = buildList {
+                if (donVi.isPurchase) add("Đơn vị gốc")
+                if (donVi.isDefault) add("Bán lẻ mặc định")
+            }
+            macDinh.text = nhan.joinToString(" • ")
+            macDinh.visibility = if (nhan.isEmpty()) View.GONE else View.VISIBLE
+
             nutSua.setOnClickListener { khiSua(donVi) }
             nutXoa.setOnClickListener { khiXoa(donVi) }
         }

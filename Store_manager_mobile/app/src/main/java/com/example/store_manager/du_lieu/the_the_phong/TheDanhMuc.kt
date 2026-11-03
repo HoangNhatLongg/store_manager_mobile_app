@@ -47,6 +47,7 @@ data class TheDonViTinh(
  * @param soLuongQuyDoi  So don vi co ban trong 1 don vi ban, vi du 1 thung = 24 chai.
  * @param gia            Gia ban cua 1 don vi ban.
  * @param laMacDinh      True neu la don vi mac dinh cua san pham.
+ * @param laDonViGoc     True neu la don vi goc dung de nhap hang, vi du thung, loc.
  */
 @Entity(tableName = "don_vi_san_pham")
 data class TheDonViSanPham(
@@ -55,7 +56,8 @@ data class TheDonViSanPham(
     val maDonViTinh: String,
     val soLuongQuyDoi: Int = 1,
     val gia: Double = 0.0,
-    val laMacDinh: Boolean = false
+    val laMacDinh: Boolean = false,
+    val laDonViGoc: Boolean = false
 )
 
 /**

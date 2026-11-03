@@ -87,7 +87,8 @@ object ChuyenDoiDuLieu {
             maDonViTinh = donViSanPham.unitId,
             soLuongQuyDoi = donViSanPham.conversionQty,
             gia = donViSanPham.price,
-            laMacDinh = donViSanPham.isDefault
+            laMacDinh = donViSanPham.isDefault,
+            laDonViGoc = donViSanPham.isPurchase
         )
     }
 

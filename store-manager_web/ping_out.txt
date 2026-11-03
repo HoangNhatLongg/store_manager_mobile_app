@@ -1,0 +1,8 @@
+
+Pinging repo1.maven.org.cdn.cloudflare.net [2606:4700::6812:120c] with 32 bytes of data:
+Reply from 2606:4700::6812:120c: time=78ms 
+
+Ping statistics for 2606:4700::6812:120c:
+    Packets: Sent = 1, Received = 1, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 78ms, Maximum = 78ms, Average = 78ms

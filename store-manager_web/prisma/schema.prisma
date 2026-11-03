@@ -1,0 +1,318 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User Model - For authentication
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      UserRole @default(STAFF)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  importInvoices ImportInvoice[]
+  saleInvoices   SaleInvoice[]
+  refreshTokens  MobileRefreshToken[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  STAFF
+}
+
+// Category Model
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  products Product[]
+
+  @@map("categories")
+}
+
+// Product Model
+model Product {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  sku          String   @unique
+  barcode      String?  @unique
+  description  String?
+  imageUrl     String?
+  importPrice  Decimal  @db.Decimal(12, 2)
+  previousImportPrice Decimal? @db.Decimal(12, 2)
+  sellPrice    Decimal  @db.Decimal(12, 2)
+  previousSellPrice Decimal? @db.Decimal(12, 2)
+  stock        Int      @default(0)
+  minStock     Int      @default(10)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  categoryId String?
+  category   Category?          @relation(fields: [categoryId], references: [id])
+  
+  importItems ImportInvoiceItem[]
+  saleItems   SaleInvoiceItem[]
+  units       ProductUnit[]
+
+  @@map("products")
+}
+
+// Unit Model - Đơn vị tính (lon, thùng, chai, kg...)
+model Unit {
+  id           String   @id @default(cuid())
+  name         String   // "Lon", "Thùng", "Chai", "Kg"
+  abbreviation String   @unique // "lon", "thùng", "chai", "kg"
+  isBaseUnit   Boolean  @default(true)  // Lon, chai, cái là đơn vị cơ bản
+  createdAt    DateTime @default(now())
+
+  // Relations
+  products    ProductUnit[]
+  importItems ImportInvoiceItem[]
+
+  @@map("units")
+}
+
+// ProductUnit Model - Liên kết sản phẩm với đơn vị và giá
+model ProductUnit {
+  id             String   @id @default(cuid())
+  productId      String
+  unitId         String
+  conversionQty  Int      @default(1)  // Số lượng quy đổi (1 thùng = 24 lon)
+  price          Decimal  @db.Decimal(12, 2)
+  isDefault      Boolean  @default(false)  // Đơn vị bán lẻ mặc định khi bán hàng
+  isPurchase     Boolean  @default(false)  // Đơn vị gốc dùng để nhập hàng (thùng, lốc...)
+  createdAt      DateTime @default(now())
+
+  // Relations
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  unit    Unit    @relation(fields: [unitId], references: [id])
+
+  @@unique([productId, unitId])
+  @@map("product_units")
+}
+
+// Supplier Model
+model Supplier {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String?
+  email     String?
+  address   String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  importInvoices ImportInvoice[]
+
+  @@map("suppliers")
+}
+
+// Import Invoice Model - Hóa đơn nhập hàng
+model ImportInvoice {
+  id             String   @id @default(cuid())
+  invoiceNumber  String   @unique
+  supplierId     String?
+  supplier       Supplier? @relation(fields: [supplierId], references: [id])
+  totalAmount    Decimal  @db.Decimal(15, 2)
+  notes          String?
+  status         InvoiceStatus @default(PENDING)
+  createdById    String
+  createdBy      User     @relation(fields: [createdById], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  items ImportInvoiceItem[]
+
+  @@map("import_invoices")
+}
+
+// Import Invoice Item Model
+model ImportInvoiceItem {
+  id              String   @id @default(cuid())
+  importInvoiceId String
+  importInvoice   ImportInvoice @relation(fields: [importInvoiceId], references: [id], onDelete: Cascade)
+  productId       String
+  product         Product  @relation(fields: [productId], references: [id])
+  quantity        Int      // Số lượng theo đơn vị gốc nhập hàng (vd: 10 thùng)
+  unitId          String?  // Đơn vị gốc dùng khi nhập hàng
+  unit            Unit?    @relation(fields: [unitId], references: [id])
+  unitName        String?  // Chụp lại tên đơn vị tại thời điểm nhập
+  conversionQty   Int      @default(1)  // Hệ số quy đổi của đơn vị gốc (1 thùng = 24 lon)
+  quantityBase    Int      @default(0)  // Số lượng quy đổi sang đơn vị bán lẻ cơ bản
+  unitPrice       Decimal  @db.Decimal(12, 2)
+  previousUnitPrice Decimal? @db.Decimal(12, 2)
+  totalPrice      Decimal  @db.Decimal(15, 2)
+  createdAt       DateTime @default(now())
+
+  @@map("import_invoice_items")
+}
+
+// Customer Model
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String?
+  email     String?
+  address   String?
+  points    Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  saleInvoices SaleInvoice[]
+
+  @@map("customers")
+}
+
+// Sale Invoice Model - Hóa đơn bán hàng
+model SaleInvoice {
+  id            String   @id @default(cuid())
+  invoiceNumber String   @unique
+  customerId    String?
+  customer      Customer? @relation(fields: [customerId], references: [id])
+  subtotal      Decimal  @db.Decimal(15, 2)
+  discount      Decimal  @db.Decimal(15, 2) @default(0)
+  totalAmount   Decimal  @db.Decimal(15, 2)
+  paymentMethod PaymentMethod @default(CASH)
+  notes         String?
+  status        InvoiceStatus @default(COMPLETED)
+  createdById   String
+  createdBy     User     @relation(fields: [createdById], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  items SaleInvoiceItem[]
+
+  @@map("sale_invoices")
+}
+
+// Sale Invoice Item Model
+model SaleInvoiceItem {
+  id           String   @id @default(cuid())
+  saleInvoiceId String
+  saleInvoice  SaleInvoice @relation(fields: [saleInvoiceId], references: [id], onDelete: Cascade)
+  productId    String
+  product      Product  @relation(fields: [productId], references: [id])
+  quantity     Int
+  unitPrice    Decimal  @db.Decimal(12, 2)
+  importPrice  Decimal  @db.Decimal(12, 2)  // Giá nhập tại thời điểm bán
+  totalPrice   Decimal  @db.Decimal(15, 2)
+  createdAt    DateTime @default(now())
+
+  @@map("sale_invoice_items")
+}
+
+// Settings Model - For storing app settings
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      String   @default("string")
+  group     String   @default("general")
+  isPublic  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+// Audit Log Model - For tracking changes
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  entity     String
+  entityId   String?
+  changes    Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+// SyncOperation lưu trạng thái từng thao tác gửi từ mobile.
+// operationId là khóa idempotency do mobile tạo trước khi đưa dữ liệu vào queue.
+// Nhờ bảng này, server có thể trả lại kết quả cũ thay vì tạo giao dịch trùng
+// khi mobile retry vì timeout hoặc mất mạng giữa request và response.
+model SyncOperation {
+  id            String   @id @default(cuid())
+  operationId   String   @unique
+  entityType    String
+  entityId      String
+  operationType String
+  status        String
+  result        Json?
+  errorCode     String?
+  errorMessage  String?
+  createdById   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([entityType, entityId])
+  @@index([createdById])
+  @@map("sync_operations")
+}
+
+// MobileRefreshToken lưu các refresh token đã cấp cho app Android.
+//
+// Access token chỉ sống 15 phút nên khi mất mạng lâu, token hết hạn và app bị
+// đăng xuất oan. Refresh token sống lâu hơn, được lưu trong DB để có thể thu
+// hồi (revoke) khi người dùng đổi mật khẩu hoặc đăng xuất.
+//
+// tokenId chính là jti trong JWT, dùng làm khóa tra cứu và làm duy nhất nên
+// mỗi lần refresh sẽ xoay vòng token mới.
+model MobileRefreshToken {
+  id        String    @id @default(cuid())
+  tokenId   String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@map("mobile_refresh_tokens")
+}
+
+// Enums
+enum InvoiceStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  CARD
+  E_WALLET
+}

@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary - Emerald Green - Softer */
+  --color-primary: hsl(160 60% 45%);
+  --color-primary-foreground: hsl(0 0% 100%);
+
+  /* Background - Warm off-white */
+  --color-background: hsl(40 20% 98%);
+  --color-foreground: hsl(220 20% 25%);
+
+  /* Card - Slightly off-white */
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(220 20% 25%);
+
+  /* Popover */
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(220 20% 25%);
+
+  /* Secondary - Warm gray */
+  --color-secondary: hsl(40 15% 94%);
+  --color-secondary-foreground: hsl(220 15% 35%);
+
+  /* Muted */
+  --color-muted: hsl(40 10% 92%);
+  --color-muted-foreground: hsl(220 10% 50%);
+
+  /* Accent - Very subtle warm */
+  --color-accent: hsl(40 20% 96%);
+  --color-accent-foreground: hsl(220 15% 35%);
+
+  /* Destructive */
+  --color-destructive: hsl(0 65% 55%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+
+  /* Border - Very subtle, almost invisible */
+  --color-border: hsl(40 15% 88%);
+  --color-input: hsl(40 15% 94%);
+  --color-ring: hsl(160 60% 45%);
+
+  /* Chart Colors - Softer pastels */
+  --color-chart-1: hsl(160 55% 45%);
+  --color-chart-2: hsl(35 70% 55%);
+  --color-chart-3: hsl(215 50% 50%);
+  --color-chart-4: hsl(280 45% 55%);
+  --color-chart-5: hsl(340 50% 55%);
+
+  /* Larger, softer radius */
+  --radius: 0.75rem;
+}
+
+/* Dark Mode - Soft dark */
+.dark {
+  --color-background: hsl(220 25% 10%);
+  --color-foreground: hsl(40 15% 92%);
+
+  --color-card: hsl(220 22% 14%);
+  --color-card-foreground: hsl(40 15% 92%);
+
+  --color-popover: hsl(220 22% 14%);
+  --color-popover-foreground: hsl(40 15% 92%);
+
+  --color-primary: hsl(160 55% 50%);
+  --color-primary-foreground: hsl(220 25% 10%);
+
+  --color-secondary: hsl(220 20% 20%);
+  --color-secondary-foreground: hsl(40 15% 92%);
+
+  --color-muted: hsl(220 18% 18%);
+  --color-muted-foreground: hsl(40 10% 60%);
+
+  --color-accent: hsl(220 18% 22%);
+  --color-accent-foreground: hsl(40 15% 92%);
+
+  --color-destructive: hsl(0 60% 55%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+
+  --color-border: hsl(220 18% 22%);
+  --color-input: hsl(220 18% 22%);
+  --color-ring: hsl(160 55% 50%);
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--color-border));
+  }
+  
+  body {
+    background-color: hsl(var(--color-background));
+    color: hsl(var(--color-foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}

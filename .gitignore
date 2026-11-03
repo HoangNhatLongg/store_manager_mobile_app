@@ -1,0 +1,31 @@
+# Log files build/dev
+*.log
+st.txt
+git_status.txt
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Gradle / Android
+.gradle/
+local.properties
+captures/
+.externalNativeBuild
+.cxx
+
+# Env
+.env
+.env.*
+!.env.example
